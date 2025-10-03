@@ -1,4 +1,10 @@
 package src.main.dsa.datastructure.BinaryTree;
 
-public enum BinaryTreeEnums {
+public enum TraversalEnums {
+    
+    INORDER,
+    
+    POST_ORDER,
+    
+    PRE_ORDER;
 }

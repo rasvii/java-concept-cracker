@@ -1,27 +1,76 @@
 package src.main.multithreading.basic;
 
-public class MyThread extends Thread{
+import java.util.logging.Logger;
+
+public class MyThread{
+    
+    public static void main(String[] args) throws InterruptedException {
+//        Runner runner1 = new Runner();
+//        runner1.start();
+//
+//        Runner runner2 = new Runner();
+//        runner2.start();
+        
+        Thread t1 = new Thread(new RunnerRunnable());
+        t1.start();
+
+        Thread t2 = new Thread(new RunnerRunnable());
+        t2.start();
+        
+        Thread t3 = new Thread(new Runnable() {
+            
+            @Override
+            public void run() {
+                for(int i= 0; i < 10 ; i++) {
+                    System.out.println("hello " +i);
+
+                    try{
+                        Thread.sleep(100);
+                    }
+                    catch(InterruptedException ex){
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+        
+        t3.start();
+        
+    }
+}
+
+
+class Runner extends Thread{
 
     @Override
     public void run() {
-        for(int i = 1; i <= 5; i++){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        for(int i= 0; i < 10 ; i++) {
+            System.out.println("hello " +i);
+
+            try{
+                Thread.sleep(100);
             }
-            System.out.println(i);
+            catch(InterruptedException ex){
+                ex.printStackTrace();
+            }
         }
     }
+}
 
-    public static void main(String[] args) throws InterruptedException {
-        MyThread t1 = new MyThread();
-        System.out.println(t1.getState());
-        t1.start();
-        System.out.println(t1.getState());
-        t1.join();
-        System.out.println(t1.getState());
-        
-        
+
+class RunnerRunnable implements  Runnable {
+    
+    @Override
+    public void run() {
+        for(int i= 0; i < 10 ; i++) {
+            System.out.println("hello " +i);
+
+            try{
+                Thread.sleep(100);
+            }
+            catch(InterruptedException ex){
+                ex.printStackTrace();
+            }
+        }
     }
 }
